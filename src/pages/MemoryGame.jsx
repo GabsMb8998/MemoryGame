@@ -93,20 +93,23 @@
         return (
             <div
                 className={`font-josefin h-screen flex flex-col items-center justify-center bg-black`}>
-            <div className='text-white border-1 border-white absolute left-0 top-5 w-[19%] pl-2 py-4 2xl:py-7 2xl:text-2xl'>
+
+            <div className='text-white border-1 border-white absolute left-0 top-5 w-[19%] xl:w-[21%] 2xl:w-[18%] pl-2 py-4 xl:py-5 2xl:py-7 2xl:text-2xl'>
                 <div className='relative' >
-                    <span className='ml-3'> JOGO DA MEMÓRIA</span>
+                    <span className='ml-3 xl:text-xl 2xl:text-2xl'> JOGO DA MEMÓRIA</span>
                 </div>
             </div>
 
-            <div className="grid grid-cols-7 gap-0.5 2xl:gap-1 mb-4 mt-10">
+            <div className=" grid md:grid-cols-7 gap-0.5 2xl:gap-1 mt-16 px-2">
+
                 {cards.map((card, index) => {
                 const isFlipped = flippedIndices.includes(index) || matchedCards.includes(index);
 
                     return (
                     <div
                         key={index}
-                        className="w-[10px] h-[90px] xl:w-[124px] xl:h-[124px] 2xl:w-48 2xl:h-48  perspective"
+                        className="w-[50px] h-[50px] md:w-[110px] md:h-[110px] xl:w-[150px] xl:h-[150px] 2xl:w-48 2xl:h-48 perspective"
+
                         onClick={() => handleCardClick(index)}
                     >
                         <div
