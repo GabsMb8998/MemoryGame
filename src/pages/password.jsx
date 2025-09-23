@@ -4,20 +4,26 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function Password(){ 
-  const [password, setPassord] = useState('')
-  const [correctPassword, setCorrectPassword] = useState(true)
+  const [password, setPassword] = useState('')
+  const [correctPassword, setCorrectPassword] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    if (password === '1234'){
-      setCorrectPassword(true)
+    console.log(password, 'senha sem lower case')
+    console.log('executou a funcao')
+    console.log(password.toLocaleLowerCase(), 'senha')
+    if (password.toLocaleLowerCase() == 'corrida atitude'){
+      setCorrectPassword(false)
       console.log('passou')
       navigate('/memorygame')
     }else {
-      setCorrectPassword(false)
+      console.log('passou por aqui')
+      setCorrectPassword(true)
     }
   }
+
+  console.log(correctPassword, 'correctPassoword')
 
   return (
     <main className="w-full h-screen bg-black text-white ">
@@ -40,9 +46,9 @@ export default function Password(){
               <span className="text-lg text-[#737373]">Insira a senha corretamente para participar do <span className="text-[#7EFF5B]">Desafio</span></span>
             </div>
             <div className="flex flex-col items-center justify-center my-10">
-                <input type="text" value={password} onChange={(e)=>setPassord(e.target.value)} className="placeholder:text-[#686869] border-1 border-[#686869] w-[80%] px-4 py-2 rounded-sm focus:outline-1" placeholder="senha"/>
-                <button onClick={()=>handleSubmit()} className="bg-[#7EFF5B] text-black w-[80%] py-2 rounded-sm font-semibold mt-4">enviar</button>
-                {!correctPassword && (
+                <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)} className="placeholder:text-[#686869] border-1 border-[#686869] w-[80%] px-4 py-2 rounded-sm focus:outline-1" placeholder="senha"/>
+                <button onClick={()=>console.log('clicou')} className="bg-[#7EFF5B] text-black w-[80%] py-2 rounded-sm font-semibold mt-4">enviar</button>
+                {correctPassword && (
                   <span className="text-red-500">Senha incorreta</span>
                 )}
             </div>

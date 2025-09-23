@@ -4,70 +4,64 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function Password(){ 
-  const [password, setPassord] = useState('')
-  const [correctPassword, setCorrectPassword] = useState(true)
+  const [password, setPassword] = useState('')
+  const [correctPassword, setCorrectPassword] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    if (password === '1234'){
-      setCorrectPassword(true)
+    console.log(password, 'senha sem lower case')
+    console.log('executou a funcao')
+    console.log(password.toLocaleLowerCase(), 'senha')
+    if (password.toLocaleLowerCase() == 'corrida atitude'){
+      setCorrectPassword(false)
       console.log('passou')
       navigate('/memorygame')
     }else {
-      setCorrectPassword(false)
+      console.log('passou por aqui')
+      setCorrectPassword(true)
     }
   }
 
+  console.log(correctPassword, 'correctPassoword')
+
   return (
-   <main className="w-full h-screen relative text-white overflow-hidden">
-
-      {/* Fundo preto como base */}
-      <div className="absolute inset-0 bg-black z-0" />
-
-      {/* Lupa sobre o fundo, atrás do conteúdo */}
-      <div className="absolute bottom-0 left-0 w-full z-10 opacity-60">
-        <img src="/decorations/lupa.svg" alt="" className="w-[40%] h-full  " />
+    <main className="w-full h-screen bg-black text-white ">
+      <div className="absolute bottom-0 left-0 w-full ">
+        <img src="/decorations/lupa.svg" alt="" className="w-[40%] h-full -z-0 relative" />
       </div>
 
-      {/* Decorações acima da lupa */}
-      <div className="absolute bottom-5 left-2 w-[90%] z-20">
-        <img src="/decorations/corridaAtitude.svg" className="w-[80%] 2xl:w-[70%]" />
+      <div className="absolute bottom-5  left-2 w-[90%]">
+        <img src="/decorations/corridaAtitude.svg" className="w-[80%]"/>
       </div>
 
-      <div className=" w-full z-20">
-        <img src="/decorations/arrowGroup.svg" className="w-[20%] absolute top-4 right-4 2xl:w-[18%]" />
+      <div className=" w-full">
+        <img src="/decorations/arrowGroup.svg" className="w-[20%] absolute right-4 top-4"/>
       </div>
 
-      {/* Conteúdo principal acima de tudo */}
-      <div className="flex flex-col justify-center items-center h-full z-20 relative">
+      <div className="flex flex-col justify-center items-center h-full z-50 relative">
         <div>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl md:text-3xl 2xl:text:7xl">Insira sua senha</h1>
-
-            <span className="text-lg md:text-xl xl:text-2xl 2xl:text-2xl text-[#737373]">
-              Insira a senha corretamente para participar do <span className="text-[#7EFF5B]">Desafio</span>
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center justify-center my-10">
-
-            <input type="text" value={password} onChange={(e)=>setPassord(e.target.value)}
-              className="placeholder:text-[#686869] border border-[#686869] w-[80%] px-4 py-2 xl:py-3 rounded-sm focus:outline-1 text-white"
-              placeholder="senha"
-            />
-            <button onClick={handleSubmit}
-              className="hover:bg-[#6de64cf1] bg-[#7EFF5B] text-black w-[80%] py-2 xl:py-3 rounded-sm font-bold mt-4"
-            >
-              Enviar
-            </button>
-            {!correctPassword && (
-              <span className="text-red-500 mt-2 md:text-lg">Senha incorreta</span>
-            )}
-          </div>
+            <div className="flex flex-col text-center">
+              <h1 className="text-4xl">Insira sua senha</h1>
+              <span className="text-2xl text-[#737373] mt-1">Insira a senha corretamente para participar do <span className="text-[#7EFF5B]">Desafio</span></span>
+            </div>
+            <div className="flex flex-col items-center justify-center my-10">
+                <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)} className="placeholder:text-[#686869] border-1 border-[#686869] w-[80%] px-4 py-3 rounded-sm focus:outline-1 text-lg" placeholder="senha"/>
+                <button onClick={()=>handleSubmit()} onKeyDown={(e)=>{
+                  if (e.key == 'Enter'){
+                    handleSubmit()
+                  }
+                }} className="bg-[#7EFF5B] hover:bg-[#7fff5be0] text-black w-[80%] py-3 rounded-sm font-semibold mt-4 text-lg">enviar</button>
+                {correctPassword && (
+                  <span className="text-red-500">Senha incorreta</span>
+                )}
+            </div>
         </div>
       </div>
-    </main>
 
+
+
+    
+    </main>
   )
 }
